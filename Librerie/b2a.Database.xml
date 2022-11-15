@@ -1,0 +1,498 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+b2a.Database
+</name>
+</assembly>
+<members>
+<member name="F:b2a.Database.Odbc_Parametri.chiaveRegistro">
+	<summary>Chiave di registro in cui sono memorizzati i dati</summary>
+</member><member name="M:b2a.Database.Odbc_Parametri.#ctor">
+	<summary>
+ Costruttore della classe
+ </summary>
+	<remarks>I parametri vengono ad essere quelli di default</remarks>
+</member><member name="M:b2a.Database.Odbc_Parametri.#ctor(System.String)">
+	<summary>
+ Costruttore della classe con lettura parametri da registro
+ </summary>
+	<param name="_chiaveRegistro">La chiave completa di registro in cui scrivere/leggere i valori</param>
+	<remarks></remarks>
+</member><member name="M:b2a.Database.Odbc_Parametri.caricaConfigurazioneRegistro">
+	<summary>
+ Lettura dei dati di connessione col DB dalle chiavi di registro
+ </summary>
+	<remarks></remarks>
+</member><member name="M:b2a.Database.Odbc_Parametri.scriviConfigurazioneRegistro">
+	<summary>
+ Scrittura dei dati di connessione col DB nelle chiavi di registro
+ </summary>
+	<remarks></remarks>
+</member><member name="M:b2a.Database.Odbc_Parametri.esisteConfigurazioneRegistro(System.String)">
+	<summary>
+ Verifica se è stata definita/esiste la configurazione su registro
+ </summary>
+	<param name="_chiaveRegistro">La chiave completa di registro in cui scrivere/leggere i valori</param>
+	<returns>True se esiste la chiave su registro (anche se è vuota)</returns>
+</member><member name="T:b2a.Database.Odbc_Parametri">
+	<summary>
+ Classe che incapsula i dati per l'accesso al database ODBC
+ e le funzioni per il trasferimento di questi dati da memoria a Registro
+ e viceversa
+ </summary>
+	<remarks></remarks>
+</member><member name="F:b2a.Database.Odbc_Interface.file_trace_db">
+	<summary>
+ Nome del file di trace. Se si vuole utilizzare il trace comune, portarlo alla stringa vuota
+ </summary>
+</member><member name="F:b2a.Database.Odbc_Interface.mostraFinestra">
+	<summary>
+ Indica se in caso di errori di connessione va mostrata la finestra di setup (default=FALSE)
+ </summary>
+</member><member name="M:b2a.Database.Odbc_Interface.#ctor(System.String,b2a.BlackBox.I_logWriter,System.String)">
+	<summary>
+ Costruttore della classe 
+ </summary>
+	<param name="_chiaveRegistro">La chiave del registro dove memorizzare i parametri di connessione</param>
+	<remarks></remarks>
+</member><member name="M:b2a.Database.Odbc_Interface.#ctor(b2a.Database.Odbc_Parametri,b2a.BlackBox.I_logWriter)">
+	<summary>
+ Costruttore della classe 
+ </summary>
+	<param name="_parametriDB">Parametri di connessione</param>
+	<param name="_myLogger">Riferimento all'oggetto Black Box</param>
+	<remarks></remarks>
+</member><member name="M:b2a.Database.Odbc_Interface.esisteConfigurazioneRegistro(System.String,System.String)">
+	<summary>
+ Verifica se è stata definita/esiste la configurazione su registro
+ </summary>
+	<param name="_chiaveRegistro">La chiave completa di registro in cui scrivere/leggere i valori</param>
+	<returns>True se esiste la chiave su registro (anche se è vuota)</returns>
+</member><member name="M:b2a.Database.Odbc_Interface.esiste_o_creaConfigurazioneRegistro(System.String,System.String)">
+	<summary>
+ Verifica se esiste su registro la configurazione per il DB e se non esiste la crea
+ </summary>
+	<param name="_chiaveRegistro">La chiave del registro del programma</param>
+	<param name="_nomeDB">Parametro opzionale per il nome del DB</param>
+	<returns>True se la chiave esisteva, False se non esisteva</returns>
+	<remarks>Fa uso della funzione <seealso cref="M:b2a.Database.Odbc_Interface.esisteConfigurazioneRegistro(System.String,System.String)"/></remarks>
+</member><member name="M:b2a.Database.Odbc_Interface.connectionString">
+	<summary>
+ Compone la stringa di connessione, basandosi sui dati interni
+ </summary>
+	<returns>La stringa di connessione</returns>
+</member><member name="M:b2a.Database.Odbc_Interface.apriConnessione(System.Boolean)">
+	<summary>
+ Apre una connessione
+ </summary>
+	<param name="scriviTrc">True se l'eventuale eccezione viene scritta su file</param>
+	<returns>L'oggetto Connessione se è tutto ok, altrimenti Nothing</returns>
+	<remarks>Gestisce internamente le eccezioni</remarks>
+</member><member name="M:b2a.Database.Odbc_Interface.erroreConnessione">
+	<summary>
+ Funzione lanciata quando la connessione non è riuscita
+ Non fa nulla, e va sovrascritta in caso di ereditarietà
+ </summary>
+	<remarks></remarks>
+</member><member name="M:b2a.Database.Odbc_Interface.testConnection">
+	<summary>
+ Effettua un test sulla connessione
+ </summary>
+	<returns>True se la connessione è valida</returns>
+	<remarks>Gestisce internamente le eccezioni</remarks>
+</member><member name="M:b2a.Database.Odbc_Interface.SelectSqlDataSet(System.String)">
+	<summary>
+ Effettua una query/SP e restituisce dei dati
+ </summary>
+	<param name="Sql">Query o SP, in formato testo</param>
+	<returns>Il dataset richiesto, 'nothing' in caso di errore</returns>
+	<remarks>Gestisce internamente le eccezioni</remarks>
+</member><member name="M:b2a.Database.Odbc_Interface.ExecuteSql(System.String)">
+	<summary>
+ Effettua una query/SP senza restituire dei dati
+ </summary>
+	<param name="Sql">Query o SP, in formato testo</param>
+	<returns>Esito dell'esecuzione</returns>
+	<remarks>Gestisce internamente le eccezioni</remarks>
+</member><member name="M:b2a.Database.Odbc_Interface.parametriMinimi">
+	<summary>
+ Restituisce una stringa con i parametri minimi (server e db)
+ </summary>
+</member><member name="T:b2a.Database.Odbc_Interface">
+	<summary>
+ Classe per la gestione semplificata dell'interazione con un database
+ di tipo ODBC
+ Ristabilisce la connessione ogni volta
+ </summary>
+</member><member name="M:b2a.Database.FunzioniGenerali.verificaDataset(System.Data.DataSet,System.Int32[])">
+	<summary>
+		<para>Verifica se un dataset è diverso da nothing e soddisfa i requisiti che ci si aspetta.</para>
+		<para>Esempio: (myds, {3, 2, 0}) significa che myds deve essere con almeno 3 tabelle, la prima con almeno 3 righe e la seconda con 2.</para>
+	</summary>
+	<param name="ds">Dataset da verificare</param>
+	<param name="nrMinimoRigheTbl">Numero minimo di righe nelle varie tabelle (0 se non serve tale controllo) [es {3, 1, 0}]</param>
+	<returns>False se il ds è nothing, o pur non essendo nothing non ha un numero di tabelle minimo corretto, o pur avendo un numero di tabelle sufficiente, esse non hanno il nr minimo di righe richiesto</returns>
+	<remarks></remarks>
+</member><member name="M:b2a.Database.FunzioniGenerali.command2str(System.Data.SqlClient.SqlCommand@)">
+	<summary>
+ Restituisce una stringa che converte una variabile SqlCommand
+ in un formato stampabile e facilmente testabile in SqlServerManagementStudio
+ </summary>
+	<param name="SqlCmd"></param>
+	<returns></returns>
+</member><member name="P:b2a.Database.My.Resources.Resources.ResourceManager">
+	<summary>
+  Restituisce l'istanza di ResourceManager nella cache utilizzata da questa classe.
+</summary>
+</member><member name="P:b2a.Database.My.Resources.Resources.Culture">
+	<summary>
+  Esegue l'override della proprietà CurrentUICulture del thread corrente per tutte le
+  ricerche di risorse eseguite utilizzando questa classe di risorse fortemente tipizzata.
+</summary>
+</member><member name="T:b2a.Database.My.Resources.Resources">
+	<summary>
+  Classe di risorse fortemente tipizzata per la ricerca di stringhe localizzate e così via.
+</summary>
+</member><member name="F:b2a.Database.StoredProcedure.myCommand">
+	<summary>
+ L'oggetto SqlCommand vero e proprio
+ </summary>
+</member><member name="M:b2a.Database.StoredProcedure.cancellaParametri">
+	<summary>
+ Resetta tutti i parametri finora inseriti
+ </summary>
+</member><member name="M:b2a.Database.StoredProcedure.parametro(System.String,System.Object)">
+	<summary>
+ Aggiunge (se c'è) o modifica un parametro per la chiamata alla stored procedure
+ </summary>
+	<param name="_nomeParametro">Il nome del parametro (ad esempio "@codice")</param>
+	<param name="_valore">Il valore del parametro (usare nothing per passare il valore NULL)</param>
+	<remarks></remarks>
+</member><member name="M:b2a.Database.StoredProcedure.parametro(System.String,System.Object,System.Data.SqlDbType)">
+	<summary>
+ Aggiunge (se c'è) o modifica un parametro per la chiamata alla stored procedure
+ </summary>
+	<param name="_nomeParametro">Il nome del parametro (ad esempio "@codice")</param>
+	<param name="_valore">Il valore del parametro (usare nothing per passare il valore NULL)</param>
+	<remarks></remarks>
+</member><member name="M:b2a.Database.StoredProcedure.toString">
+	<summary>
+ Restituisce una stringa con la Stored Procedure e parametri
+ in un formato "leggibile". Inoltre, facendo copia+incolla della 
+ stringa è possibile eseguirla in Query Analyzer
+ </summary>
+</member><member name="T:b2a.Database.StoredProcedure">
+	<summary>
+ Classe per la gestione di stored procedures e relativi parametri
+ Per utilizzare parametri di tipo tabella, utilizzare la classe <seealso cref="T:b2a.Database.ParametroTabella">ParametroTabella</seealso>
+	</summary>
+	<remarks></remarks>
+</member><member name="M:b2a.Database.ParametroTabella.aggiungiColonna(System.Type)">
+	<summary>
+ Aggiunge alla tabella interna una nuova colonna del tipo specificato
+ </summary>
+	<param name="tipoDati"></param>
+</member><member name="M:b2a.Database.ParametroTabella.aggiungiRiga(System.Object[])">
+	<summary>
+ Aggiunge alla tabella interna una riga, con i valori dei campi indicati.
+ I campi devono essere nello stesso ordine in cui sono state inserite le colonne.
+ </summary>
+	<param name="elencoParametri">Array dei valori dei campi</param>
+	<returns>FALSE se ci sono stati errori (nr.parametri diverso dal nr. colonne o errori nel cast)</returns>
+</member><member name="P:b2a.Database.ParametroTabella.tabellaInterna">
+	<summary>
+ Restituisce un riferimento alla tabella interna
+ </summary>
+	<value>La tabella interna</value>
+</member><member name="T:b2a.Database.ParametroTabella">
+	<summary>
+ Classe per gestire l'inserimento di tabelle come parametri di SP
+ Utilizzo: 
+  Dim dt2 As New Database.parametroTabella()
+  dt2.aggiungiColonna(GetType(Integer))
+  dt2.aggiungiColonna(GetType(Integer))
+  dt2.aggiungiRiga(21, 87)
+  dt2.aggiungiRiga(27, 12)
+  ....
+ </summary>
+	<remarks>
+ Mattia 16/09/2014
+ </remarks>
+</member><member name="F:b2a.Database.SqlSrv_Parametri.LUNGHEZZA_MAX_PWD">
+	<summary>
+ Lunghezza massima della password
+ </summary>
+</member><member name="F:b2a.Database.SqlSrv_Parametri.chiaveRegistro">
+	<summary>Chiave di registro in cui sono memorizzati i dati</summary>
+</member><member name="F:b2a.Database.SqlSrv_Parametri.server">
+	<summary>Nome del server (o IP) completo di istanza (localhost\SQLS1)</summary>
+</member><member name="P:b2a.Database.SqlSrv_Parametri.server_puro">
+	<summary>Nome del server (o IP) privo dell'eventuale (localhost\SQLS1 -&gt; localhost)</summary>
+</member><member name="F:b2a.Database.SqlSrv_Parametri.LocalDB">
+	<summary>Connessione a LocalDB</summary>
+</member><member name="F:b2a.Database.SqlSrv_Parametri.database">
+	<summary>Nome del database</summary>
+</member><member name="F:b2a.Database.SqlSrv_Parametri.connectionType">
+	<summary>Tipo di connessione [TRUSTED o altro]</summary>
+</member><member name="F:b2a.Database.SqlSrv_Parametri.user">
+	<summary>Utente SqlServer</summary>
+</member><member name="F:b2a.Database.SqlSrv_Parametri.password">
+	<summary>Password per l'utente SqlServer</summary>
+</member><member name="P:b2a.Database.SqlSrv_Parametri.passwordSha1">
+	<summary>Password codificata per l'utente SqlServer</summary>
+</member><member name="F:b2a.Database.SqlSrv_Parametri.connectionTimeout">
+	<summary>Timeout di connessione [s]</summary>
+</member><member name="F:b2a.Database.SqlSrv_Parametri.commandTimeout">
+	<summary>Timeout per l'esecuzione delle query [s]</summary>
+</member><member name="M:b2a.Database.SqlSrv_Parametri.#ctor">
+	<summary>
+ Costruttore della classe
+ </summary>
+	<remarks>I parametri vengono ad essere quelli di default</remarks>
+</member><member name="M:b2a.Database.SqlSrv_Parametri.#ctor(System.String)">
+	<summary>
+ Costruttore della classe con lettura parametri da registro
+ </summary>
+	<param name="_chiaveRegistro">La chiave completa di registro in cui scrivere/leggere i valori</param>
+	<remarks>I parametri vengono letti da registro</remarks>
+</member><member name="M:b2a.Database.SqlSrv_Parametri.caricaConfigurazioneRegistro">
+	<summary>
+ Lettura dei dati di connessione col DB dalle chiavi di registro 
+ </summary>
+	<remarks></remarks>
+</member><member name="M:b2a.Database.SqlSrv_Parametri.scriviConfigurazioneRegistro">
+	<summary>
+ Scrittura dei dati di connessione col DB nelle chiavi di registro
+ </summary>
+	<remarks></remarks>
+</member><member name="M:b2a.Database.SqlSrv_Parametri.esisteConfigurazioneRegistro(System.String)">
+	<summary>
+ Verifica se è stata definita/esiste la configurazione su registro
+ </summary>
+	<param name="_chiaveRegistro">La chiave completa di registro in cui scrivere/leggere i valori</param>
+	<returns>True se esiste la chiave su registro (anche se è vuota)</returns>
+</member><member name="M:b2a.Database.SqlSrv_Parametri.codifica(System.String)">
+	<summary>
+ Da una stringa in chiaro ottiene la versione codificata.
+ La stringa deve avere lunghezza compresa tra 2 e LUNGHEZZA_MAX_PWD
+ </summary>
+</member><member name="M:b2a.Database.SqlSrv_Parametri.decodifica(System.String)">
+	<summary>
+ Da una stringa codificata.
+ La stringa deve avere lunghezza maggiore di 2
+ </summary>
+</member><member name="T:b2a.Database.SqlSrv_Parametri">
+	<summary>
+ Classe che incapsula i dati per l'accesso al database
+ e le funzioni per il trasferimento di questi dati da memoria a Registro
+ e viceversa
+ </summary>
+</member><member name="F:b2a.Database.SqlSrv_Interface.ParamDB">
+	<summary>
+ Riferimento alla classe omonima ParamDB per la gestione dei parametri generali di DB
+ </summary>
+</member><member name="F:b2a.Database.SqlSrv_Interface.file_trace_db">
+	<summary>
+ Nome del file di trace. Se si vuole utilizzare il trace comune, portarlo alla stringa vuota
+ </summary>
+</member><member name="F:b2a.Database.SqlSrv_Interface.poolEnable">
+	<summary>
+ Indica se è attivato o meno il pool di connessione (default=TRUE)
+ </summary>
+</member><member name="F:b2a.Database.SqlSrv_Interface.mostraFinestra">
+	<summary>
+ Indica se in caso di errori di connessione va mostrata la finestra di setup (default=FALSE)
+ </summary>
+</member><member name="M:b2a.Database.SqlSrv_Interface.#ctor(System.String,b2a.BlackBox.I_logWriter,System.String)">
+	<summary>
+ Costruttore della classe 
+ </summary>
+	<param name="_chiaveRegistro">La chiave del registro del programma</param>
+	<param name="_myLogger">Riferimento all'oggetto Black Box</param>
+	<param name="_nomeDB">Parametro opzionale per il nome del DB (di default è "DB")</param>
+	<remarks></remarks>
+</member><member name="M:b2a.Database.SqlSrv_Interface.#ctor(b2a.Database.SqlSrv_Parametri,b2a.BlackBox.I_logWriter)">
+	<summary>
+ Costruttore della classe 
+ </summary>
+	<param name="_parametriDB">Parametri di connessione</param>
+	<param name="_myLogger">Riferimento all'oggetto Black Box</param>
+	<remarks></remarks>
+</member><member name="M:b2a.Database.SqlSrv_Interface.esisteConfigurazioneRegistro(System.String,System.String)">
+	<summary>
+ Verifica se esiste su registro la configurazione per il DB
+ </summary>
+	<param name="_chiaveRegistro">La chiave del registro del programma</param>
+	<param name="_nomeDB">Parametro opzionale per il nome del DB (di default è "DB")</param>
+	<remarks></remarks>
+</member><member name="M:b2a.Database.SqlSrv_Interface.esiste_o_creaConfigurazioneRegistro(System.String,System.String)">
+	<summary>
+ Verifica se esiste su registro la configurazione per il DB e se non esiste la crea
+ </summary>
+	<param name="_chiaveRegistro">La chiave del registro del programma</param>
+	<param name="_nomeDB">Parametro opzionale per il nome del DB (di default è "DB")</param>
+	<returns>True se la chiave esisteva, False se non esisteva</returns>
+	<remarks>Fa uso della funzione <seealso cref="M:b2a.Database.SqlSrv_Interface.esisteConfigurazioneRegistro(System.String,System.String)"/></remarks>
+</member><member name="M:b2a.Database.SqlSrv_Interface.SelectSqlDataSet(System.String)">
+	<summary>
+ Effettua una query/SP e restituisce dei dati
+ </summary>
+	<param name="Sql">Query o SP, in formato testo</param>
+	<returns>Il dataset richiesto, 'Nothing' in caso di errore</returns>
+	<remarks>Gestisce internamente le eccezioni</remarks>
+</member><member name="M:b2a.Database.SqlSrv_Interface.SelectSqlDataset(System.Data.SqlClient.SqlCommand)">
+	<summary>
+ Effettua una query/SP e restituisce dei dati
+ </summary>
+	<param name="Cmd">Oggetto SqlCommand, che ingloba la Query o la SP</param>
+	<returns>Il dataset richiesto, 'Nothing' in caso di errore</returns>
+	<remarks>Gestisce internamente le eccezioni</remarks>
+</member><member name="M:b2a.Database.SqlSrv_Interface.SelectSqlDataset(b2a.Database.StoredProcedure)">
+	<summary>
+ Effettua una query/SP e restituisce dei dati
+ </summary>
+	<param name="Cmd">Oggetto StoredProcedure</param>
+	<returns>Il dataset richiesto, 'Nothing' in caso di errore</returns>
+	<remarks>Gestisce internamente le eccezioni</remarks>
+</member><member name="M:b2a.Database.SqlSrv_Interface.ExecuteSql(System.String)">
+	<summary>
+ Effettua una query/SP senza restituire dei dati
+ </summary>
+	<param name="Sql">Query o SP, in formato testo</param>
+	<returns>Esito dell'esecuzione</returns>
+	<remarks>Gestisce internamente le eccezioni</remarks>
+</member><member name="M:b2a.Database.SqlSrv_Interface.ExecuteSql(System.Data.SqlClient.SqlCommand)">
+	<summary>
+ Effettua una query/SP senza restituire dei dati
+ </summary>
+	<param name="Cmd">Oggetto SqlCommand, che ingloba la Query o la SP</param>
+	<returns>Esito dell'esecuzione</returns>
+	<remarks>Gestisce internamente le eccezioni</remarks>
+</member><member name="M:b2a.Database.SqlSrv_Interface.ExecuteSql(b2a.Database.StoredProcedure)">
+	<summary>
+ Effettua una query/SP senza restituire dei dati
+ </summary>
+	<param name="Cmd">Oggetto StoredProcedure</param>
+	<returns>Esito dell'esecuzione</returns>
+	<remarks>Gestisce internamente le eccezioni</remarks>
+</member><member name="M:b2a.Database.SqlSrv_Interface.ExecuteSql2(System.String)">
+	<summary>
+ Effettua una query/SP restituendo il numero di righe modificate
+ </summary>
+	<param name="Sql">Query o SP, in formato testo</param>
+	<returns>Nr righe modificate (-1 in caso di errore)</returns>
+	<remarks>Gestisce internamente le eccezioni</remarks>
+</member><member name="M:b2a.Database.SqlSrv_Interface.ExecuteSql2(System.Data.SqlClient.SqlCommand)">
+	<summary>
+ Effettua una query/SP restituendo il numero di righe modificate
+ </summary>
+	<param name="Cmd">Oggetto SqlCommand, che ingloba la Query o la SP</param>
+	<returns>Nr righe modificate (-1 in caso di errore)</returns>
+	<remarks>Gestisce internamente le eccezioni</remarks>
+</member><member name="M:b2a.Database.SqlSrv_Interface.ExecuteSql2(b2a.Database.StoredProcedure)">
+	<summary>
+ Effettua una query/SP restituendo il numero di righe modificate
+ </summary>
+	<param name="Cmd">Oggetto StoredProcedure</param>
+	<returns>Nr righe modificate (-1 in caso di errore)</returns>
+	<remarks>Gestisce internamente le eccezioni</remarks>
+</member><member name="M:b2a.Database.SqlSrv_Interface.apriConnessione(System.Boolean)">
+	<summary>
+ Apre una connessione
+ </summary>
+	<param name="scriviTrc">True se l'eventuale eccezione viene scritta su file</param>
+	<returns>L'oggetto Connessione se è tutto ok, altrimenti Nothing</returns>
+	<remarks>Gestisce internamente le eccezioni</remarks>
+</member><member name="M:b2a.Database.SqlSrv_Interface.erroreConnessione">
+	<summary>
+ Funzione lanciata quando la connessione non è riuscita
+ Non fa nulla, e va sovrascritta in caso di ereditarietà
+ </summary>
+	<remarks></remarks>
+</member><member name="M:b2a.Database.SqlSrv_Interface.testConnection">
+	<summary>
+ Effettua un test sulla connessione
+ </summary>
+	<returns>True se la connessione è valida</returns>
+	<remarks>Gestisce internamente le eccezioni</remarks>
+</member><member name="M:b2a.Database.SqlSrv_Interface.stringaConnessione">
+	<summary>
+ Compone la stringa di connessione, basandosi sui dati interni
+ </summary>
+	<returns>La stringa di connessione</returns>
+	<remarks>Fa uso dell'oggetto <c>SqlConnectionStringBuilder</c></remarks>
+</member><member name="M:b2a.Database.SqlSrv_Interface.connectionStringOLE">
+	<summary>
+ Compone la stringa di connessione, basandosi sui dati interni
+ </summary>
+	<returns>La stringa di connessione per connessioni OLE (Component One)</returns>
+</member><member name="M:b2a.Database.SqlSrv_Interface.parametriMinimi">
+	<summary>
+ Restituisce una stringa con i parametri minimi (server e db)
+ </summary>
+</member><member name="T:b2a.Database.SqlSrv_Interface">
+	<summary>
+ Classe per la gestione semplificata dell'interazione con il database
+ in modalità disconessa
+ </summary>
+</member><member name="M:b2a.Database.ParamDB.leggi(System.String,System.String,System.String@,System.Int32)">
+	<summary>
+ Recupero di un parametro dalla tabella Parametri, fornendo anche l'indicazione se la lettura è andata a buon fine.
+ [ sql "Gen_ParametroGet" ]
+ </summary>
+	<param name="modulo">Nome del modulo (o "Generali")</param>
+	<param name="parametro">Nome del parametro</param>
+	<param name="valoreOutput">Valore letto del parametro (OUTPUT)</param>
+	<param name="nrParametro">Nr. del parametro (di default = 1)</param>
+	<returns>Esito della lettura del parametro</returns>
+	<remarks></remarks>
+</member><member name="M:b2a.Database.ParamDB.leggi(System.String,System.String,System.Int32)">
+	<summary>
+ Recupero di un parametro dalla tabella Parametri 
+ [ sql "Gen_ParametroGet" ]
+ </summary>
+	<param name="modulo">Nome del modulo (o "Generali")</param>
+	<param name="parametro">Nome del parametro</param>
+	<param name="nrParametro">Nr. del parametro (di default = 1)</param>
+	<returns>Il parametro (e "" se non è stato trovato o in caso di errore)</returns>
+	<remarks></remarks>
+</member><member name="M:b2a.Database.ParamDB.scrivi(System.String,System.String,System.String,System.String)">
+	<summary>
+ Imposta un parametro su DB
+ [ sql "Gen_ParametroSet" ]
+ </summary>
+	<param name="modulo">Nome del modulo (o "Generali")</param>
+	<param name="parametro">Nome del parametro</param>
+	<param name="valore1">Valore1</param>
+	<param name="valore2">Valore2</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:b2a.Database.ParamDB.elenco(System.String)">
+	<summary>
+ Fornisce l'elenco dei parametri come lista di parametriDB. Usando la funzione parametriDBdatatable è possibile
+ avere l'elenco come datatable.  [ sql "Gen_ParametriLista" ]
+ </summary>
+	<param name="modulo">Nome del modulo ("" indica tutti i parametri)</param>
+	<returns>Lista dei parametri</returns>
+</member><member name="M:b2a.Database.ParamDB.elencoTbl(System.String)">
+	<summary>
+ Fornisce l'elenco dei parametri come Datatable. Fa uso della funzione "parametriElenco"
+ </summary>
+	<param name="modulo">Nome del modulo ("" indica tutti i parametri)</param>
+	<returns>Datatable con colonne "modulo, parametro, valore1, valore2"</returns>
+</member><member name="M:b2a.Database.ParamDB.parametriDBdatatable(System.Collections.Generic.List{b2a.Database.ParamDB.parametroDB})">
+	<summary>
+ Converte una lista di parametri in una dataTable
+ </summary>
+	<param name="lista">Lista di oggetti di tipo "parametroDB"</param>
+	<returns>Datatable</returns>
+	<remarks></remarks>
+</member><member name="T:b2a.Database.ParamDB">
+	<summary>
+ Classe per la gestione dei parametri di funzionamento dei programmi, memorizzati nella tabella Parametri.
+ Le funzioni sono tutte shared
+ </summary>
+</member>
+</members>
+</doc>

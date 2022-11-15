@@ -1,0 +1,412 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+b2a.Interfaccia
+</name>
+</assembly>
+<members>
+<member name="M:b2a.Interfaccia.cls_Controllore.impostaControllore">
+	<summary>
+ Imposta un riferimento a se stesso
+ </summary>
+	<remarks>Necessaria, dopo l'inizializzazione, per puntare al servizio agente, e da lì ai logger generici</remarks>
+</member><member name="M:b2a.Interfaccia.cls_Controllore.aggiungiServizio(b2a.Interfaccia.cls_SottoServizio)">
+	<summary>
+ Aggiunta di un sottoservizio all'elenco
+ </summary>
+	<returns>Esito dell'inserzione: false in caso di nome duplicato o caratteri non consentiti</returns>
+	<remarks>Genera un'eccezione se trova un nome duplicato o che contiene il carattere underscore</remarks>
+</member><member name="M:b2a.Interfaccia.cls_Controllore.elencoNomiServizi">
+	<summary>
+ Restituisce l'elenco dei nomi dei sottoservizi
+ </summary>
+</member><member name="M:b2a.Interfaccia.cls_Controllore.servizio(System.String)">
+	<summary>
+ Restituisce il riferimento al sottoservizio con il nome indicato
+ </summary>
+	<param name="nome">Nome univoco del sottoservizio</param>
+</member><member name="M:b2a.Interfaccia.cls_Controllore.percorso">
+	<summary>
+ Restituisce il percorso sul pc nel filesystem dove c'è l'eseguibile del servizio e vengono scritti i log
+ </summary>
+	<returns></returns>
+</member><member name="T:b2a.Interfaccia.cls_Controllore">
+	<summary>
+ Questo è un sottoservizio particolare che funge da controllore per tutti gli altri
+ Ha anch'esso una coda di messaggi, e funzioni di avvio e stop, ma ha anche una lista
+ degli altri sottoservizi.
+ Template v8.0 
+ </summary>
+</member><member name="P:b2a.Interfaccia.My.Resources.Resources.ResourceManager">
+	<summary>
+  Restituisce l'istanza di ResourceManager nella cache utilizzata da questa classe.
+</summary>
+</member><member name="P:b2a.Interfaccia.My.Resources.Resources.Culture">
+	<summary>
+  Esegue l'override della proprietà CurrentUICulture del thread corrente per tutte le
+  ricerche di risorse eseguite utilizzando questa classe di risorse fortemente tipizzata.
+</summary>
+</member><member name="T:b2a.Interfaccia.My.Resources.Resources">
+	<summary>
+  Classe di risorse fortemente tipizzata per la ricerca di stringhe localizzate e così via.
+</summary>
+</member><member name="F:b2a.Interfaccia.cls_SottoServizio.intervallo_ms">
+	<summary> Intervallo, in ms, tra la fine di un ciclo e l'inizio del successivo</summary>
+</member><member name="F:b2a.Interfaccia.cls_SottoServizio.codaMessaggi">
+	<summary>Coda per lo scambio messaggi tra servizio e controllore</summary>
+</member><member name="F:b2a.Interfaccia.cls_SottoServizio._nomeProprio">
+	<summary>
+ Nome proprio sottoservizio: è private per evitare di essere cambiato, anche dalle classi che ereditano.
+ </summary>
+</member><member name="F:b2a.Interfaccia.cls_SottoServizio._descrizioneBreve">
+	<summary>Descrizione corta del sottoservizio (nel Supervisore è il nome della TAB)</summary>
+</member><member name="F:b2a.Interfaccia.cls_SottoServizio._descrizioneLunga">
+	<summary>Descrizione lunga del sottoservizio</summary>
+</member><member name="F:b2a.Interfaccia.cls_SottoServizio._nomePadre">
+	<summary>Nome del sottoservizio padre (se c'è)</summary>
+</member><member name="P:b2a.Interfaccia.cls_SottoServizio.nomePadre">
+	<summary>
+ Restituisce il nome completo del sottoservizio padre (se c'è)
+ </summary>
+	<returns>Spazio vuoto nel caso un sottoservizio sia di primo livello</returns>
+</member><member name="P:b2a.Interfaccia.cls_SottoServizio.bRun">
+	<summary>
+ Restituisce il flag che indica se il thread è contrassegnato per fermarsi alla prima esecuzione successiva
+ </summary>
+</member><member name="P:b2a.Interfaccia.cls_SottoServizio.nome">
+	<summary>
+ Restituisce il nome completo univoco del sottoservizio, composto dal nome del padre unito con il nome proprio
+ con un separatore standard
+ </summary>
+</member><member name="P:b2a.Interfaccia.cls_SottoServizio.livello">
+	<summary>
+ Restituisce il livello 0=controllore, 1=sottoservizi primari, etc.
+ </summary>
+</member><member name="P:b2a.Interfaccia.cls_SottoServizio.descrizione">
+	<summary>
+ Restituisce la descrizione breve del servizio 
+ </summary>
+</member><member name="P:b2a.Interfaccia.cls_SottoServizio.descrizioneLunga">
+	<summary>
+ Restituisce la descrizione lunga del servizio, associata al nome della classe
+ </summary>
+</member><member name="F:b2a.Interfaccia.cls_SottoServizio._primaEsecuzione">
+	<summary>True se è la prima esecuzione del ciclo dopo l'avvio</summary>
+</member><member name="M:b2a.Interfaccia.cls_SottoServizio.Init">
+	<summary>
+ Inizializzazione del sottoservizio, sovrascrivibile dalle classi derivate
+ </summary>
+</member><member name="M:b2a.Interfaccia.cls_SottoServizio.impostaIntervallo">
+	<summary>
+ Legge da DB l'intervallo di attesa per il sottoservizio e lo imposta
+ </summary>
+</member><member name="M:b2a.Interfaccia.cls_SottoServizio.StartSottoServizio">
+	<summary>
+ Avvia il thread del sottoservizio (a cui dà un nome uguale)
+ </summary>
+	<remarks>Lanciata da clsServizioAgente</remarks>
+</member><member name="M:b2a.Interfaccia.cls_SottoServizio.StopSottoServizio">
+	<summary>
+ Ferma il thread del sottoservizio e dei sottoservizi figli
+ </summary>
+	<remarks>Lanciata da clsServizioAgente</remarks>
+</member><member name="M:b2a.Interfaccia.cls_SottoServizio.forzaChiusura">
+	<summary>
+ Metodo che dealloca fisicamente il thread d'esecuzione di un sottoservizio
+ </summary>
+	<remarks>Lanciata da clsServizioAgente</remarks>
+</member><member name="M:b2a.Interfaccia.cls_SottoServizio.dormiVeglia(System.Int32)">
+	<summary>
+ Procedura che effettua dei piccoli sleep fino al raggiungimento di un determinato lasso di tempo, fermandosi e uscendo se nel frattempo il sottoservizio è stato fermato
+ </summary>
+	<param name="intervallo">Lasso di tempo da aspettare (in ms)</param>
+	<remarks></remarks>
+</member><member name="M:b2a.Interfaccia.cls_SottoServizio.richiediArresto">
+	<summary>
+ Imposta a FALSE la variabile d'esecuzione del ciclo principale, provocandone l'uscita
+ </summary>
+</member><member name="P:b2a.Interfaccia.cls_SottoServizio.primaEsecuzione">
+	<summary>
+ True se è la prima esecuzione del ciclo dopo l'avvio
+ </summary>
+</member><member name="M:b2a.Interfaccia.cls_SottoServizio.scriviMsg(System.String,System.String,b2a.BlackBox.livelloLog)">
+	<summary>
+ Inserisce il messaggio sia nel logger (su file) sia nella coda messaggi
+ </summary>
+</member><member name="M:b2a.Interfaccia.cls_SottoServizio.scriviMsg(System.String,b2a.BlackBox.livelloLog)">
+	<summary>
+ Inserisce il messaggio sia nel logger (su file) sia nella coda messaggi
+ </summary>
+</member><member name="M:b2a.Interfaccia.cls_SottoServizio.scriviExc(System.String,System.Exception,System.String)">
+	<summary>
+ Inserisce l'eccezione sia nel logger (su file) sia nella coda messaggi
+ </summary>
+</member><member name="M:b2a.Interfaccia.cls_SottoServizio.scriviExc(System.Exception,System.String)">
+	<summary>
+ Inserisce l'eccezione sia nel logger (su file) sia nella coda messaggi
+ </summary>
+</member><member name="M:b2a.Interfaccia.cls_SottoServizio.aggiungiSottoservizioFiglio(b2a.Interfaccia.cls_SottoServizio)">
+	<summary>
+ Aggiunge all'elenco dei sottoservizi figli il sottoservizio indicato. 
+ Lo inserisce anche nell'elenco dei sottoservizi generali del controllore, verificando
+ che sia possibile inserirlo (nome non duplicato etc)
+ </summary>
+	<param name="sottoServ"></param>
+</member><member name="M:b2a.Interfaccia.cls_SottoServizio.avviaSottoserviziFigli">
+	<summary>
+ Avvia i sottoservizi figli. Chiamato automaticamente dopo la funzione di inizializzazione
+ </summary>
+</member><member name="M:b2a.Interfaccia.cls_SottoServizio.togliSottoservizioFiglio(b2a.Interfaccia.cls_SottoServizio)">
+	<summary>
+ Ferma e toglie dall'elenco dei sottoservizi figli il sottoservizio indicato
+ </summary>
+	<param name="sottoServ"></param>
+</member><member name="M:b2a.Interfaccia.cls_SottoServizio.fermaSottoserviziFigli">
+	<summary>
+ Ferma gli eventuali sottoservizi figli. Chiamata automaticamente in StopSottoServizio
+ </summary>
+</member><member name="T:b2a.Interfaccia.cls_SottoServizio">
+	<summary>
+ Sottoservizio generico, classe astratta che funge da genitore
+ per tutti i sottoservizi.
+ Implementa al suo interno sia le routine per l'avvio o la chiusura del thread, associato a ciascun
+ sottoservizio, sia la coda di messaggi.
+ Template v8.0
+ </summary>
+</member><member name="F:b2a.Interfaccia.Costanti.NOME_OGGETTO">
+	<summary>Nome dell'oggetto che fa da controllore</summary>
+	<remarks>Costante</remarks>
+</member><member name="F:b2a.Interfaccia.Costanti.SERVIZIO_CONTROLLORE_NOME">
+	<summary>Nome del sottoservizio che fa da controllore</summary>
+	<remarks>Costante</remarks>
+</member><member name="F:b2a.Interfaccia.Costanti.FILE_PARAMETRI_NOME">
+	<summary>Nome, senza estensione, del file testuale che contiene i parametri di funzionamento</summary>
+</member><member name="F:b2a.Interfaccia.Costanti.FILE_PARAMETRI_ESTENSIONE">
+	<summary>Estensione del file testuale che contiene i parametri di funzionamento</summary>
+</member><member name="F:b2a.Interfaccia.Costanti.SEPARATORE_PADRI_FIGLI">
+	<summary>Carattere che, nei nomi dei sottoservizi, consente di separare i padri dai figli</summary>
+</member><member name="F:b2a.Interfaccia.Costanti.REG_DB_SQLS_1">
+	<summary>Nome della sottochiave di registro per la memorizzazione dei parametri di connessione SQL</summary>
+</member><member name="F:b2a.Interfaccia.Costanti.REG_DB_SQLS_2">
+	<summary>Nome della sottochiave di registro per la memorizzazione dei parametri di connessione SQL</summary>
+</member><member name="F:b2a.Interfaccia.Costanti.REG_DB_SQLS_3">
+	<summary>Nome della sottochiave di registro per la memorizzazione dei parametri di connessione SQL</summary>
+</member><member name="F:b2a.Interfaccia.Costanti.REG_DB_ODBC_1">
+	<summary>Nome della sottochiave di registro per la memorizzazione dei parametri di connessione ODBC</summary>
+</member><member name="F:b2a.Interfaccia.Costanti.REG_DB_ODBC_2">
+	<summary>Nome della sottochiave di registro per la memorizzazione dei parametri di connessione ODBC</summary>
+</member><member name="F:b2a.Interfaccia.Costanti.REG_DB_ODBC_3">
+	<summary>Nome della sottochiave di registro per la memorizzazione dei parametri di connessione ODBC</summary>
+</member><member name="T:b2a.Interfaccia.Costanti">
+	<summary>
+ Modulo che contiene le costanti di funzionamento comuni tra Agente e Supervisore
+ </summary>
+</member><member name="T:b2a.Interfaccia.StruttureDati.messaggio">
+	<summary>
+ Messaggio tra servizio e supervisore: è composto da testo, livello di priorità e data
+ </summary>
+	<remarks>La classe ha l'attributo serializzabile, ossia ha un riferimento per valore MarshalByValue</remarks>
+</member><member name="M:b2a.Interfaccia.StruttureDati.clsCodaMsgInterna.inserisciMessaggio(System.String,b2a.BlackBox.livelloLog)">
+	<summary>
+ Inserisce un messaggio nella coda
+ </summary>
+	<param name="_testo">Testo del messaggio</param>
+	<param name="_livello">Livello</param>
+	<remarks></remarks>
+</member><member name="M:b2a.Interfaccia.StruttureDati.clsCodaMsgInterna.leggiUltimoMessaggio">
+	<summary>
+ Restituisce l'ultimo messaggio arrivato sulla coda
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:b2a.Interfaccia.StruttureDati.clsCodaMsgInterna.leggiUltimiMessaggiDa(System.DateTime)">
+	<summary>
+ Restituisce una lista di tutti i messaggi arrivati a partire da una certa data in avanti
+ </summary>
+	<param name="dataIniziale">La data/ora dalla quale cominciare la ricerca</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="T:b2a.Interfaccia.StruttureDati.clsCodaMsgInterna">
+	<summary>
+ Coda Messaggi: implementazione di una coda messaggi
+ tramite array circolare, con funzione di lettura ultimi messaggi
+ (in base alla loro data)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:b2a.Interfaccia.StruttureDati.clsCodaMsg.#ctor(System.Int32)">
+	<summary>
+ Costruttore della classe
+ </summary>
+	<param name="_dimensione">Dimensione del buffer interno di ciascuna delle code messaggi</param>
+	<remarks></remarks>
+</member><member name="M:b2a.Interfaccia.StruttureDati.clsCodaMsg.inserisciMessaggio(System.String,b2a.BlackBox.livelloLog)">
+	<summary>
+ Inserisce un messaggio nella coda generale
+ </summary>
+	<param name="_testo"></param>
+	<param name="_livello"></param>
+	<remarks>Il messaggio viene inserito in una coda specifica per il livello Log</remarks>
+</member><member name="M:b2a.Interfaccia.StruttureDati.clsCodaMsg.leggiUltimiMessaggiDa(System.DateTime)">
+	<summary>
+ Restituisce una lista di tutti i messaggi arrivati a partire da una certa data in avanti
+ </summary>
+	<param name="dataIniziale">La data/ora dalla quale cominciare la ricerca</param>
+	<returns></returns>
+	<remarks>I messsaggi vengono restituiti ordinati per data</remarks>
+</member><member name="T:b2a.Interfaccia.StruttureDati.clsCodaMsg">
+	<summary>
+ Coda Messaggi Generale: coda di messaggi che basandosi su delle code interne consente di avere
+ dei buffer differenziati per i vari livelli di messaggio.
+ </summary>
+</member><member name="T:b2a.Interfaccia.StruttureDati">
+	<summary>
+ Strutture dati utilizzate per la comunicazione tra Servizio e Supervisore
+ </summary>
+	<remarks>
+ Mattia Andreolli 20/01/2012: creazione
+ Mattia Andreolli 31/12/2013: aggiunto livelloLog.prolisso
+ Mattia Andreolli 08/04/2015: utilizzata la libreria B2A.BlackBox per l'enumerazione dei livelli di msg
+ </remarks>
+</member><member name="F:b2a.Interfaccia.Parametri.NOME_CANALE">
+	<summary>Nome del canale di comunicazione Agente-Supervisore</summary>
+</member><member name="F:b2a.Interfaccia.Parametri.NR_PORTA">
+	<summary>Se il canale è TCPChannel indica la porta da usare. Se è 0, il canale è di tipo IPChannel</summary>
+</member><member name="F:b2a.Interfaccia.Parametri.INDIRIZZO_IP">
+	<summary>In caso di TCPChannel contiene l'IP del pc dell'Agente. L'Agente inserisce sempre 127.0.0.1, che va poi modificato
+ a mano e messo a disposizione, in copia, al supervisore in modo che questo abbia già l'indirizzo a cui collegarsi</summary>
+</member><member name="F:b2a.Interfaccia.Parametri.NOME_SERVIZIO">
+	<summary>Nome del sottoservizio</summary>
+</member><member name="F:b2a.Interfaccia.Parametri.NOME2_SERVIZIO">
+	<summary>Nome del sottoservizio2</summary>
+</member><member name="F:b2a.Interfaccia.Parametri.DESCR_SERVIZIO">
+	<summary>Descrizione del sottoservizio</summary>
+</member><member name="F:b2a.Interfaccia.Parametri.CHIAVE_REGISTRO">
+	<summary>Chiave del registro</summary>
+</member><member name="F:b2a.Interfaccia.Parametri.NOME_MODULO">
+	<summary>Nome del modulo per la tabella Parametri su DB</summary>
+</member><member name="F:b2a.Interfaccia.Parametri.BIT_ARCHITETTURA">
+	<summary>Bit dell'architettura (32 o 64), se non specificato si considera 32</summary>
+</member><member name="M:b2a.Interfaccia.Parametri.letturaFileParametri(System.String)">
+	<summary>
+ Lettura da file dei parametri di funzionamento dell'agente
+ </summary>
+	<param name="nomeFile">Nome del file completo di path</param>
+	<returns>False se i parametri non sono stati letti correttamente</returns>
+	<remarks>Ignora le righe vuote, e quelle che iniziano con il carattere ;</remarks>
+</member><member name="M:b2a.Interfaccia.Parametri.scriviFileParametri(System.String)">
+	<summary>
+ Scrittura dei parametri di funzionamento dell'agente
+ </summary>
+	<param name="nomeFile">Nome del file completo di path</param>
+	<returns>False se il file non è stato scritto correttamente</returns>
+	<remarks></remarks>
+</member><member name="T:b2a.Interfaccia.Parametri">
+	<summary>
+ Modulo che contiene i parametri di funzionamento comuni tra Agente e Supervisore
+ Inoltre contiene le funzioni che leggono e scrivono da/su file i parametri variabili
+ </summary>
+</member><member name="M:b2a.Interfaccia.I_controllore.elencoNomiServizi">
+	<summary>
+ Restituisce la lista degli identificativi (=nomi univoci) dei sottoservizi
+ </summary>
+</member><member name="M:b2a.Interfaccia.I_controllore.servizio(System.String)">
+	<summary>
+ Restituisce un riferimento al sottoservizio cercato
+ </summary>
+	<param name="nome">Nome identificativo del sottoservizio</param>
+</member><member name="M:b2a.Interfaccia.I_controllore.percorso">
+	<summary>
+ Restituisce il percorso dove sta funzionando il servizio generale.
+ Utile come test per verificare se il collegamento funziona
+ </summary>
+</member><member name="M:b2a.Interfaccia.I_sottoservizio.StartSottoServizio">
+	<summary>
+ Avvia il sottoservizio
+ </summary>
+</member><member name="M:b2a.Interfaccia.I_sottoservizio.StopSottoServizio">
+	<summary>
+ Ferma il sottoservizio
+ </summary>
+	<remarks>Dà qualche secondo al sottoservizio per terminare in modo soft, altrimenti lo chiude "brutalmente"</remarks>
+</member><member name="P:b2a.Interfaccia.I_sottoservizio.nome">
+	<summary>
+ Restituisce il nome univoco del sottoservizio. Esso viene usato anche per i nomi dei file di trace e log.
+ </summary>
+</member><member name="P:b2a.Interfaccia.I_sottoservizio.livello">
+	<summary>
+ Restituisce il livello 0=controllore, 1=sottoservizi primari, etc.
+ </summary>
+</member><member name="P:b2a.Interfaccia.I_sottoservizio.nomePadre">
+	<summary>
+ Restituisce il nome completo del sottoservizio padre. E' vuoto nel caso di controllore e servizi di primo livello
+ </summary>
+</member><member name="P:b2a.Interfaccia.I_sottoservizio.descrizioneBreve">
+	<summary>
+ Restituisce la descrizione breve (non necessariamente univoca) del sottoservizio. Tipicamente essa viene usata per i nomi dei tab nel supervisore
+ </summary>
+</member><member name="P:b2a.Interfaccia.I_sottoservizio.descrizioneLunga">
+	<summary>
+ Restituisce la descrizione lunga (non necessariamente univoca) del sottoservizio.
+ </summary>
+</member><member name="M:b2a.Interfaccia.I_sottoservizio.stampaParametri">
+	<summary>
+ Produce la scrittura sulla coda messaggi dei parametri di funzionamento, a livello Prolisso.
+ </summary>
+</member><member name="M:b2a.Interfaccia.I_sottoservizio.leggiUltimiMessaggiDa(System.DateTime)">
+	<summary>
+ Restituisce l'elenco di tutti i messaggi presenti sulla coda e arrivati a partire da una certa data in poi
+ </summary>
+</member><member name="F:b2a.Interfaccia.clsServizioAgente.attesaPrimaDelLancio">
+	<summary>
+ [s] Attesa prima del lancio del servizio (per poter eventualmente connettersi con il debugger)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:b2a.Interfaccia.clsServizioAgente.Lancio">
+	<summary>
+ Inizializzazione e lancio dei servizi
+ </summary>
+</member><member name="M:b2a.Interfaccia.clsServizioAgente.avvioDB">
+	<summary>
+ Avvio del db primario
+ </summary>
+	<remarks>Viene introdotta un'attesa crescente fino a che non viene stabilita la connessione</remarks>
+</member><member name="M:b2a.Interfaccia.clsServizioAgente.impostaCanaleOggettoRemoto">
+	<summary>
+ Creazione ed apertura del canale di comunicazione tra Agente e Supervisori
+ </summary>
+	<remarks></remarks>
+</member><member name="M:b2a.Interfaccia.clsServizioAgente.inizializzaSottoServizi">
+	<summary>
+ Inizializzazione dei sottoservizi, con le rispettive tempistiche
+ </summary>
+</member><member name="M:b2a.Interfaccia.clsServizioAgente.avviaSottoServizi">
+	<summary>
+ Avvio dei sottoservizi: se si tratta di un'applicazione console li fa partire tutti, altrimenti solo quelli
+  che non sono stati disattivati da registro
+ </summary>
+</member><member name="M:b2a.Interfaccia.clsServizioAgente.WriteLog(System.String)">
+	<summary>
+ Scrittura su Log generale
+ </summary>
+	<remarks>Il messaggio viene dirottato verso la coda di messaggi del Servizio Controllore</remarks>
+</member><member name="M:b2a.Interfaccia.clsServizioAgente.WriteExc(System.Exception,System.String)">
+	<summary>
+ Scrittura su Trace generale 
+ </summary>
+	<remarks>Il messaggio viene dirottato verso la coda di messaggi del Servizio Controllore</remarks>
+</member><member name="M:b2a.Interfaccia.clsServizioAgente.Chiudi">
+	<summary>
+ Chiusura dei servizi e del canale
+ </summary>
+	<remarks></remarks>
+</member><member name="T:b2a.Interfaccia.clsServizioAgente">
+	<summary>
+ Classe principale, che può essere utilizzata sia dal servizio Windows sia 
+ dalla classe clsRoot come applicazione win32
+ Template v8.0
+ </summary>
+	<remarks>Questo file rimane uguale, le personalizzazioni sono nel file clsServizioAgente2</remarks>
+</member>
+</members>
+</doc>

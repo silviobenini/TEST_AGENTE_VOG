@@ -1,0 +1,133 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+b2a.AutoUpdater
+</name>
+</assembly>
+<members>
+<member name="F:b2a.AutoUpdater.clsAutoUpdater.percorsoProgramma">
+	<summary>
+ Percorso completo del programma
+ </summary>
+</member><member name="F:b2a.AutoUpdater.clsAutoUpdater.pathAggiornamentoLocale">
+	<summary>
+ Percorso completo dove vengono scritti i log e memorizzati i file di installazione
+ </summary>
+</member><member name="F:b2a.AutoUpdater.clsAutoUpdater.ApplicaAggiornamentoAvvio">
+	<summary>
+ Variabile utilizzata dagli altri processi per memorizzare il fatto che sia stato
+ scaricato un aggiornamento del programma e che vada pertanto installato all'avvio
+ </summary>
+</member><member name="F:b2a.AutoUpdater.clsAutoUpdater.refreshAggiornamentoDB_min">
+	<summary>
+ [min] Tempo di refresh info verso il server, di default è impostato a 5 minuti.
+ Va impostato prima di chiamare la funzione [collegamentoServer]
+ </summary>
+</member><member name="M:b2a.AutoUpdater.clsAutoUpdater.#ctor(b2a.Database.SqlSrv_Interface,System.Reflection.Assembly@,System.String)">
+	<summary>
+ Costruttore 1 della classe per progetti con risorse incorporate
+ </summary>
+	<param name="_myDB"></param>
+	<param name="assemblyProgramma">Assembly del programma [Me.GetType.Assembly] o [Assembly.GetExecutingAssembly]</param>
+	<param name="nomeBuild">Nome del file build (default = "build.txt")</param>
+	<remarks></remarks>
+</member><member name="M:b2a.AutoUpdater.clsAutoUpdater.#ctor(b2a.Database.SqlSrv_Interface,System.String,System.String)">
+	<summary>
+ Costruttore 2 della classe per progetti senza risorse incorporate
+ </summary>
+	<param name="_myDB"></param>
+	<param name="percorso">Percorso dove trovare il file build</param>
+	<param name="nomeBuild">Nome del file build (default = "build.txt")</param>
+	<remarks></remarks>
+</member><member name="M:b2a.AutoUpdater.clsAutoUpdater.collegamentoServer(System.Boolean)">
+	<summary>
+ Collegamento al sistema centrale, per comunicare i propri dati di funzionamento (ora locale, ip e versione) e farsi
+ dare il nome dell'impianto. Di default attiva un timer di aggiornamento periodico dei dati.
+ </summary>
+	<param name="attivaRefreshTemporizzato">Default=True: attiva un timer per il refresh dei dati verso il server e l'invio dei file di trace</param>
+	<returns>True se il collegamento è andato a buon fine</returns>
+</member><member name="M:b2a.AutoUpdater.clsAutoUpdater.aggiornaInfoProgramma(System.Object,System.Timers.ElapsedEventArgs)">
+	<summary>
+ Funzione eseguita periodicamente dal timer
+ </summary>
+	<remarks>Lanciata dal timer "timerAggiornamentoServer" </remarks>
+</member><member name="M:b2a.AutoUpdater.clsAutoUpdater.confrontaVersioni(System.String,System.String)">
+	<summary>
+ Confronta due indici di versione del programma nel formato xx.XX (Es: 00.79)
+ </summary>
+	<param name="versione1">Prima versione per il confronto</param>
+	<param name="versione2">Seconda versione per il confronto</param>
+	<returns>Restituisce 1 se versione1 è maggiore di versione2, altrimenti 0</returns>
+	<remarks></remarks>
+</member><member name="M:b2a.AutoUpdater.clsAutoUpdater.esisteAggiornamento(System.String@)">
+	<summary>
+ Interroga il database tramite una stored procedure per ottenere l'indice dell'ultima versione disponibile di un programma e l'eventuale percorso di rete dal quale ottenere i files di installazione
+ </summary>
+	<param name="msgOutput">Riferimento all'eventuale messaggio di errore</param>
+	<returns>Restituisce TRUE se è disponibile una versione più aggiornata del programma, altrimenti FALSE</returns>
+	<remarks>Va lanciata solo se il collegamento con il server è funzionante</remarks>
+</member><member name="M:b2a.AutoUpdater.clsAutoUpdater.scaricaAggiornamento(System.String@)">
+	<summary>
+ Scarica tutti i files di installazione (da PathAggiornamentoRemoto -&gt; Cartella aggiornamenti)
+ </summary>
+	<param name="msgErrore">Riferimento all'eventuale messaggio di errore</param>
+	<returns>Restituisce TRUE se tutto è andato a buon fine e se la copia locale del file MSI d'installazione esiste, altrimenti FALSE</returns>
+	<remarks></remarks>
+</member><member name="M:b2a.AutoUpdater.clsAutoUpdater.installaAggiornamento">
+	<summary>
+ Avvia l'installazione degli aggiornamenti scaricati
+ </summary>
+</member><member name="M:b2a.AutoUpdater.clsAutoUpdater.InvioFileTraceServer">
+	<summary>
+ Controlla la cartella TRACE dei file delle eccezioni e prova ad inviarne tutti i dati verso il server
+ </summary>
+	<remarks></remarks>
+</member><member name="T:b2a.AutoUpdater.clsAutoUpdater">
+	<summary>
+ Questa classe si connette al database con due finalità:
+ 1.comunica al database i propri dati di versione, ip, data e ora locale, cosa che evidenzia l'ultimo uso di ogni programma
+ 2.si fa dare il nome dell'impianto (da mostrare normalmente nel titolo)
+ Inoltre contiene i metodi per l'autoaggiornamento del programma. Essi però vanno specializzati nelle versioni per interfacce GUI in quanto richiedono l'interazione con l'utente.
+ </summary>
+	<remarks>
+ A. Per recupare le informazioni sul programma, legge i dati del file Build.txt
+ B. La connessione al database deve essere già funzionante
+ </remarks>
+</member><member name="P:b2a.AutoUpdater.My.Resources.Resources.ResourceManager">
+	<summary>
+  Restituisce l'istanza di ResourceManager nella cache utilizzata da questa classe.
+</summary>
+</member><member name="P:b2a.AutoUpdater.My.Resources.Resources.Culture">
+	<summary>
+  Esegue l'override della proprietà CurrentUICulture del thread corrente per tutte le
+  ricerche di risorse eseguite utilizzando questa classe di risorse fortemente tipizzata.
+</summary>
+</member><member name="T:b2a.AutoUpdater.My.Resources.Resources">
+	<summary>
+  Classe di risorse fortemente tipizzata per la ricerca di stringhe localizzate e così via.
+</summary>
+</member><member name="M:b2a.AutoUpdater.clsTraceDB.controllaCartella">
+	<summary>
+ Controllo la cartella dei file di Trace per inviarli verso il Server
+ </summary>
+	<returns>False se c'è stato un errore nel collegamento verso il server</returns>
+</member><member name="M:b2a.AutoUpdater.clsTraceDB.elaboraFile(System.String,System.String)">
+	<summary>
+ Elabora un singolo file: può esserci un problema di decodifica (e allora il file viene rinominato) o di invio dati.
+ Se non ci sono problemi i dati vengono inviati e il file viene cancellato.
+ </summary>
+	<param name="nomeCompletoFile"></param>
+	<returns>Se è True si può passare al file successivo, se False ci si ferma</returns>
+	<remarks></remarks>
+</member><member name="M:b2a.AutoUpdater.clsTraceDB.decodificaFile(System.String)">
+	<summary>
+ Decodifica la struttura JSON del file
+ Fa l'opposto della funzione clsLogSuFile.scriviSuFileEccezioni
+ </summary>
+	<param name="nomeCompletoFile"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member>
+</members>
+</doc>

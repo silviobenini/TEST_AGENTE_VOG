@@ -1,0 +1,452 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+b2a.BlackBox
+</name>
+</assembly>
+<members>
+<member name="P:b2a.BlackBox.My.Resources.Resources.ResourceManager">
+	<summary>
+  Restituisce l'istanza di ResourceManager nella cache utilizzata da questa classe.
+</summary>
+</member><member name="P:b2a.BlackBox.My.Resources.Resources.Culture">
+	<summary>
+  Esegue l'override della proprietà CurrentUICulture del thread corrente per tutte le
+  ricerche di risorse eseguite utilizzando questa classe di risorse fortemente tipizzata.
+</summary>
+</member><member name="T:b2a.BlackBox.My.Resources.Resources">
+	<summary>
+  Classe di risorse fortemente tipizzata per la ricerca di stringhe localizzate e così via.
+</summary>
+</member><member name="F:b2a.BlackBox.clsBuildInfo.nomeModulo">
+	<summary>Nome univoco del modulo (utilizzato anche per verificare la presenza di aggiornamenti del programma)</summary>
+</member><member name="F:b2a.BlackBox.clsBuildInfo.versione">
+	<summary>Codice della versione [03.02] (utilizzato anche per verificare la presenza di aggiornamenti del programma)</summary>
+</member><member name="F:b2a.BlackBox.clsBuildInfo.dataRilascio">
+	<summary>Data dell'ultimo rilascio</summary>
+</member><member name="F:b2a.BlackBox.clsBuildInfo.build">
+	<summary>Nr di Build</summary>
+</member><member name="F:b2a.BlackBox.clsBuildInfo.counter">
+	<summary>Contatore release</summary>
+</member><member name="P:b2a.BlackBox.clsBuildInfo.versioneRidotta">
+	<summary>
+ Restituisce il formato ridotto del numero di versione. Ad esempio da [01.03] restituisce [1.3]
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:b2a.BlackBox.clsBuildInfo.carica_daRisorsaIncorporata(System.Reflection.Assembly@,System.String)">
+	<summary>
+ Recupera i dati della build di un programma dalla risorsa incorporata
+ </summary>
+	<param name="assemblyProgramma">Assembly del programma [Me.GetType.Assembly]</param>
+	<param name="nomeRisorsa">Nome del file build (default = "build.txt")</param>
+	<returns>False se c'è stato un problema nel caricamento dei dati dalla risorsa</returns>
+</member><member name="M:b2a.BlackBox.clsBuildInfo.carica_daFile(System.String,System.String)">
+	<summary>
+ Recupera i dati della build di un programma da un file
+ </summary>
+	<param name="percorso">Percorso del file</param>
+	<param name="nomeFile">Nome del file  (default = "build.txt")</param>
+	<returns>False se c'è stato un problema nel caricamento dei dati</returns>
+</member><member name="M:b2a.BlackBox.clsBuildInfo.carica_daStream(System.IO.StreamReader)">
+	<summary>
+ Recupera i dati della build da uno stream
+ </summary>
+	<param name="sr">Oggetto del tipo StreamReader</param>
+	<returns>False se c'è stato un problema nel caricamento dei dati dalla risorsa</returns>
+</member><member name="T:b2a.BlackBox.clsBuildInfo">
+	<summary>
+ Classe che legge ed espone all'esterno le informazioni su una build
+ lette dal corrispondente file "build.txt"
+ </summary>
+	<remarks>12/06/2015 Mattia Andreolli</remarks>
+</member><member name="F:b2a.BlackBox.livelloLog.errore">
+	<summary>Messaggio di livello 0 (da mostrare sempre)</summary>
+</member><member name="F:b2a.BlackBox.livelloLog.avviso">
+	<summary>Messaggio di livello 1 (da mostrare)</summary>
+</member><member name="F:b2a.BlackBox.livelloLog.normale">
+	<summary>Messaggio di livello 2 (log normale di funzionamento)</summary>
+</member><member name="F:b2a.BlackBox.livelloLog.debug">
+	<summary>Messaggio di livello 3 (dettagli ulteriori)</summary>
+</member><member name="F:b2a.BlackBox.livelloLog.prolisso">
+	<summary>Messaggio di livello 4 (max verbosity)</summary>
+</member><member name="T:b2a.BlackBox.livelloLog">
+	<summary>
+ Il livello di importanza di un messaggio
+ </summary>
+</member><member name="M:b2a.BlackBox.I_logWriter.scriviLog(System.String,b2a.BlackBox.livelloLog)">
+	<summary>
+ Scrive il messaggio di log
+ </summary>
+	<param name="testo">Testo da inserire</param>
+	<param name="livello">Livello di gravità (opzionale, di default = normale)</param>
+	<remarks></remarks>
+</member><member name="M:b2a.BlackBox.I_logWriter.scriviLog(System.String,System.String,b2a.BlackBox.livelloLog)">
+	<summary>
+ Scrive il messaggio di log, caratterizzando il log con un identificativo
+ </summary>
+	<param name="nome">Nome del file o identificativo unico del processo (per tenere separati i log di processi diversi)</param>
+	<param name="testo">Testo da inserire</param>
+	<param name="livello">Livello di gravità (opzionale, di default = normale)</param>
+	<remarks></remarks>
+</member><member name="M:b2a.BlackBox.I_logWriter.scriviExc(System.Exception,System.String)">
+	<summary>
+ Scrive i dettagli dell'eccezione
+ </summary>
+	<param name="ex">Eccezione</param>
+	<param name="testo">Testo opzionale da inserire</param>
+	<remarks></remarks>
+</member><member name="M:b2a.BlackBox.I_logWriter.scriviExc(System.String,System.Exception,System.String)">
+	<summary>
+ Scrive i dettagli dell'eccezione, caratterizzando il trace con un identificativo
+ </summary>
+	<param name="nome">Nome del file o identificativo unico del processo (per tenere separati i trace di processi diversi)</param>
+	<param name="ex">Eccezione</param>
+	<param name="testo">Testo opzionale da inserire</param>
+	<remarks></remarks>
+</member><member name="T:b2a.BlackBox.I_logWriter">
+	<summary>
+ Interfaccia che richiede l'implementazione di 2 metodi per la gestione dei log e delle eccezioni
+ </summary>
+</member><member name="M:b2a.BlackBox.sysClock.leggiOrologioSistema_UTC">
+	<summary>
+ Restituisce, in formato System.Date, data e ora dell'orologio di sistema, espresso in tempo UTC
+ </summary>
+	<returns>Data e ora in formato UTC. Se ci sono errori, la data è 1° gennaio 1900, 12:00</returns>
+</member><member name="M:b2a.BlackBox.sysClock.leggiOrologioSistema">
+	<summary>
+ Restituisce, in formato Date, data e ora dell'orologio di sistema, espresso in tempo LOCALE
+ </summary>
+	<returns>Data e ora in formato locale. Se ci sono errori, la data è 1° gennaio 1900, 12:00</returns>
+	<remarks>Fa uso della funzione leggiOrologioSistema_UTC</remarks>
+</member><member name="M:b2a.BlackBox.sysClock.impostaOrologioSistema_UTC(System.DateTime)">
+	<summary>
+ Imposta il tempo (data e ora) dell'orologio di sistema con un parametro espresso in tempo UTC.
+ Richiede privilegi di amministratore
+ </summary>
+	<param name="nuovaDataOra">Nuova data/ora, espressa in tempo UTC</param>
+	<returns>True se la funzione è riuscita</returns>
+	<remarks></remarks>
+</member><member name="M:b2a.BlackBox.sysClock.impostaOrologioSistema(System.DateTime)">
+	<summary>
+ Imposta il tempo (data e ora) dell'orologio di sistema con un parametro espresso in tempo LOCALE.
+ Richiede privilegi di amministratore
+ </summary>
+	<param name="nuovaDataOra">Nuova data/ora, espressa in tempo LOCALE</param>
+	<returns>True se la funzione è riuscita</returns>
+	<remarks></remarks>
+</member><member name="T:b2a.BlackBox.sysClock">
+	<summary>
+ Modulo che consente la lettura e l'impostazione del clock di sistema,
+ sia tramite tempo UTC che LOCALE
+ </summary>
+	<remarks>Fa uso delle API di Kernel32</remarks>
+</member><member name="F:b2a.BlackBox.clsImpostazioni.commento">
+	<summary>Carattere che posto a capo riga rende la riga un commento (viene ignorata)</summary>
+</member><member name="F:b2a.BlackBox.clsImpostazioni.split_parametro_valore">
+	<summary>Carattere che divide il nome parametro dal suo valore (default '=')</summary>
+</member><member name="F:b2a.BlackBox.clsImpostazioni.split_parametri">
+	<summary>Carattere che separa una coppia parametro-valore dalla successiva: se è la stringa
+ vuota, le coppie sono divise dal ritorno a capo [default = '']</summary>
+</member><member name="M:b2a.BlackBox.clsImpostazioni.caricaDaFile(System.String)">
+	<summary>
+ Carica da file l'elenco dei parametri
+ </summary>
+	<param name="nomeFile">Nome completo del file</param>
+	<returns>True se è tutto ok</returns>
+</member><member name="M:b2a.BlackBox.clsImpostazioni.caricaDaStringa(System.String@)">
+	<summary>
+ Carica da una stringa di testo l'elenco dei parametri
+ </summary>
+	<param name="stringa">Testo con l'elenco dei parametri</param>
+	<returns>True se è tutto ok</returns>
+</member><member name="M:b2a.BlackBox.clsImpostazioni.aggiungi(System.String,System.String)">
+	<summary>
+ Aggiunge all'elenco la coppia chiave-valore
+ </summary>
+	<param name="chiave">Chiave (viene effettuato il trim)</param>
+	<param name="valore">Valore (viene effettuato il trim)</param>
+	<returns>False se non è possibile aggiungere la coppia (chiave già presente)</returns>
+	<remarks></remarks>
+</member><member name="P:b2a.BlackBox.clsImpostazioni.sParam(System.String,System.String)">
+	<summary>
+ Restituisce il valore, in formato stringa, corrispondente alla chiave.
+ Dispone di un parametro opzionale che, se impostato, consente di avere quello come valore di default, in mancanza di un matching
+ Se esso non viene specificato e la chiave non è trovata, viene altrimenti restituita la stringa nulla
+ </summary>
+	<param name="key">Il nome del parametro</param>
+	<param name="DefaultValue">L'eventuale valore di ritorno di default</param>
+	<returns>La stringa con il valore del parametro</returns>
+</member><member name="P:b2a.BlackBox.clsImpostazioni.iParam(System.String,System.Int32)">
+	<summary>
+ Restituisce il valore, in formato intero, corrispondente alla chiave.
+ Dispone di un parametro opzionale che, se impostato, consente di avere quello come valore di default, in mancanza di un matching
+ Se esso non viene specificato e la chiave non è trovata, viene altrimenti restituita la stringa nulla
+ </summary>
+	<param name="key">Il nome del parametro</param>
+	<param name="DefaultValue">L'eventuale valore di ritorno di default</param>
+	<returns>Il valore intero del parametro</returns>
+</member><member name="M:b2a.BlackBox.clsImpostazioni.elencoStr(System.Boolean)">
+	<summary>
+ Restituisce una stringa con le coppie chiave-valore contenute nel dizionario
+ </summary>
+	<returns>Stringa con ritorni a capo e intestazione</returns>
+	<remarks>Le coppie sono ordinate per chiave</remarks>
+</member><member name="M:b2a.BlackBox.clsImpostazioni.reset">
+	<summary>
+ Cancella tutte le coppie chiave-valore contenute nel dizionario interno
+ </summary>
+	<remarks></remarks>
+</member><member name="M:b2a.BlackBox.clsImpostazioni.nrElementi">
+	<summary>
+ Restituisce il numero di coppie chiave-valore contenute nel dizionario interno
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="T:b2a.BlackBox.clsImpostazioni">
+	<summary>
+ Classe per la gestione di un insieme di impostazioni: contiene un dizionario che associa chiavi a valori
+ Tramite le due funzioni di lettura può restituire stringhe o interi, con eventuale
+ valore di default
+ Le impostazioni vengono lette da file o da una stringa
+ 
+ Mattia 28/11/2016
+ </summary>
+	<remarks>Non viene effettuato confronto maiuscole/minuscole nelle chiavi, quindi per aumentare le prestazioni, conviene tenerle tutte in minuscolo
+ Inoltre tramite la costante _SPLIT_PARAMETRI si possono utilizzare coppie chiave-valore divise per righe o tramite un opportuno marcatore</remarks>
+</member><member name="F:b2a.BlackBox.clsLogSuFile.max_file_size">
+	<summary>Dimensione massima del file, in byte</summary>
+</member><member name="F:b2a.BlackBox.clsLogSuFile.nomeFileLog">
+	<summary>Nome del file di log, senza estensione, senza path</summary>
+</member><member name="F:b2a.BlackBox.clsLogSuFile.nomeFileTrc">
+	<summary>Nome del file di eccezioni, senza estensione, senza path</summary>
+</member><member name="F:b2a.BlackBox.clsLogSuFile.formatoDataOra">
+	<summary>Formato della data ora, usata come prefisso per ogni riga di log</summary>
+</member><member name="F:b2a.BlackBox.clsLogSuFile.SeparatoreNomeFileDataOra">
+	<summary>Carattere che, nel nome del file di log di backup, divide il nome dell'identificativo log dalla stringa dataora (ad esempio MyLog_191003.txt)</summary>
+</member><member name="F:b2a.BlackBox.clsLogSuFile.FormatoDataOraStd">
+	<summary>Formato della data ora [15/11/18 23:41:57]</summary>
+</member><member name="F:b2a.BlackBox.clsLogSuFile.FormatoDataOraStd_ms">
+	<summary>Formato della data ora con millisecondi [15/11/18 23:49:02.048]</summary>
+</member><member name="F:b2a.BlackBox.clsLogSuFile._percorso">
+	<summary>Percorso dove scrivere i file di log e trace (viene gestito da una Proprietà)</summary>
+</member><member name="F:b2a.BlackBox.clsLogSuFile.versioneProgramma">
+	<summary>Versione del programma (del tipo 1.3) che viene scritta, se valorizzata, nei log e nei file di trace</summary>
+</member><member name="F:b2a.BlackBox.clsLogSuFile.max_giorni_trace">
+	<summary>Numero di giorni dopo i quali i file di trace primari vengono cancellati (0 per nessuna pulizia)</summary>
+</member><member name="F:b2a.BlackBox.clsLogSuFile.max_giorni_log">
+	<summary>Numero di giorni dopo i quali i file di log vengono cancellati (0 per nessuna pulizia)</summary>
+</member><member name="F:b2a.BlackBox.clsLogSuFile.sogliaControlloCancellazione">
+	<summary>Indica quante scritture vengono fatte prima di fare un controllo per la cancellazione dei file troppo vecchi.
+ Se impostato a 0, il controllo viene fatto ad ogni scrittura</summary>
+</member><member name="F:b2a.BlackBox.clsLogSuFile.dataPuliziaTrace">
+	<summary>Data ultima pulizia trace</summary>
+</member><member name="F:b2a.BlackBox.clsLogSuFile.dataPuliziaLog">
+	<summary>Data ultima pulizia log</summary>
+</member><member name="F:b2a.BlackBox.clsLogSuFile.contatoreControlloLog">
+	<summary>Contatore interno delle scritture dei log (una volta raggiunta la soglia controllo, viene resettato)</summary>
+</member><member name="F:b2a.BlackBox.clsLogSuFile.contatoreControlloTrace">
+	<summary>Contatore interno delle scritture dei trace (una volta raggiunta la soglia controllo, viene resettato)</summary>
+</member><member name="F:b2a.BlackBox.clsLogSuFile.filesTraceAttivati">
+	<summary>Se True viene creato un file di trace aggiuntivo che poi viene inviato al server</summary>
+</member><member name="F:b2a.BlackBox.clsLogSuFile.max_giorni_file_trace">
+	<summary>Numero di giorni dopo i quali i file di trace secondari vengono cancellati (0 per nessuna pulizia)</summary>
+</member><member name="F:b2a.BlackBox.clsLogSuFile.FORMATO_DATAORA_TRACE">
+	<summary>Formato della data ora con millisecondi nel trace</summary>
+</member><member name="F:b2a.BlackBox.clsLogSuFile.CARTELLA_TRACE">
+	<summary>Nome della cartella che contiene i file di trace</summary>
+</member><member name="F:b2a.BlackBox.clsLogSuFile.ESTENSIONE_FILE_TRACE">
+	<summary>Estensione dei file di trace</summary>
+</member><member name="F:b2a.BlackBox.clsLogSuFile.contatoreControlloFileEccezioni">
+	<summary>Contatore interno delle scritture dei file di trace (una volta raggiunta la soglia controllo, viene resettato)</summary>
+</member><member name="M:b2a.BlackBox.clsLogSuFile.scriviExc(System.Exception,System.String)">
+	<summary>
+  Scrive i dettagli dell'eccezione nel file di default
+ </summary>
+	<param name="_exception">L'eccezione</param>
+	<remarks></remarks>
+</member><member name="M:b2a.BlackBox.clsLogSuFile.scriviExc(System.String,System.Exception,System.String)">
+	<summary>
+  Scrive i dettagli dell'eccezione nel file specificato
+ </summary>
+	<param name="_nome">Corrisponde al nome del file, senza estensione. Se non specificato è il nome di default, altrimenti il nome del file è composto da percorso + identificativo + estensione standard</param>
+	<param name="_exception">L'eccezione</param>
+	<remarks></remarks>
+</member><member name="M:b2a.BlackBox.clsLogSuFile.scriviExcFile(System.String,System.String@,System.Exception@,System.String)">
+	<summary>
+ Scrive  i dettagli dell'eccezione nel file di trace specificato
+ </summary>
+	<param name="_percorso">La cartella dove andare a scrivere</param>
+	<param name="_nome">L'identificativo (che corrisponde al nome "puro" del file)</param>
+	<param name="_exception">L'eccezione</param>
+	<param name="_testoAddizionale">Eventuale testo aggiuntivo (ad es.una query SQL)</param>
+	<remarks>Se sono in Debug i messaggi appaiono come msgbox invece che essere scritti su file</remarks>
+</member><member name="M:b2a.BlackBox.clsLogSuFile.scriviLog(System.String,b2a.BlackBox.livelloLog)">
+	<summary>
+ Scrive un testo nel file di log di default
+ </summary>
+	<param name="_log">testo del messaggio di log</param>
+	<param name="_level">livello del messaggio (default=informazione)</param>
+	<remarks></remarks>
+</member><member name="M:b2a.BlackBox.clsLogSuFile.scriviLog(System.String,System.String,b2a.BlackBox.livelloLog)">
+	<summary>
+ Scrive un testo nel file di log specificato
+ </summary>
+	<param name="_nome">Corrisponde al nome del file, senza estensione. Se non specificato è il nome di default, altrimenti il nome del file è composto da percorso + identificativo + estensione standard</param>
+	<param name="_log">testo del messaggio di log</param>
+	<param name="_level">livello del messaggio (default=informazione)</param>
+	<remarks></remarks>
+</member><member name="M:b2a.BlackBox.clsLogSuFile.scriviLogFile(System.String,System.String,System.String,b2a.BlackBox.livelloLog)">
+	<summary>
+ Scrive il log nel file specificato
+ </summary>
+	<param name="_percorso">La cartella dove andare a scrivere</param>
+	<param name="_nome">L'identificativo (che corrisponde al nome "puro" del file)</param>
+	<param name="_log">testo del messaggio di log</param>
+	<param name="_level">livello del messaggio (default=informazione)</param>
+	<remarks></remarks>
+</member><member name="M:b2a.BlackBox.clsLogSuFile.scriviSuFile(System.Text.StringBuilder@,System.String)">
+	<summary>
+ Effettua la scrittura vera e propria su file
+ </summary>
+	<param name="bld"></param>
+	<param name="fileName">Nome del file completo di percorso</param>
+	<remarks>Se il file è troppo grosso, ne fa un backup</remarks>
+</member><member name="M:b2a.BlackBox.clsLogSuFile.cancellaFileVecchi(System.DateTime@,System.String,System.Int32)">
+	<summary>
+ Si occupa di cancellare i file obsoleti e restituisce una stringa con l'esito
+ </summary>
+	<param name="giorno">Giorno di riferimento</param>
+	<param name="nomeFile">Il nome del file in cui scrivere, che diventa riferimento per quelli da cancellare</param>
+	<param name="max_giorni">Il numero massimo di giorni dopo il quale i file vengono cancellati</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:b2a.BlackBox.clsLogSuFile.scriviSuFileEccezioni(System.String@,System.Exception@,System.String@,System.String@)">
+	<summary>
+ Scrive i dettagli di un'eccezione in un file JSON
+ </summary>
+	<param name="_percorso">Percorso del programma, nel quale viene creata e popolata la cartella TRACE con i file delle eccezioni</param>
+	<param name="_exception">L'eccezione da tracciare</param>
+	<param name="identificativo">Identificativo del modulo del programma che ha generato l'eccezione</param>
+	<param name="_testoAddizionale">Testo aggiuntivo</param>
+	<remarks></remarks>
+</member><member name="M:b2a.BlackBox.clsLogSuFile.cancellaFileVecchi(System.String,System.Int32)">
+	<summary>
+ Si occupa di cancellare i file obsoleti 
+ </summary>
+	<param name="cartellaLavoro">Percorso completo dove si trovano i file di TRACE</param>
+	<param name="max_giorni">Il numero massimo di giorni dopo il quale i file vengono cancellati</param>
+	<remarks></remarks>
+</member><member name="T:b2a.BlackBox.clsLogSuFile">
+	<summary>
+ Classe che gestisce i Log e i file di errori (Trace) scrivendoli su due file distinti. Quando essi superano il valore max_file_size vengono rinominati.
+ I file Log troppo vecchi (max_giorni_log) vengono cancellati. 
+ </summary>
+</member><member name="M:b2a.BlackBox.clsRegistro.#ctor">
+	<summary>
+ Costruttore privato per classe di soli metodi statici
+ </summary>
+</member><member name="M:b2a.BlackBox.clsRegistro.leggiValore(System.String,System.String,System.Object)">
+	<summary>
+ Legge un valore dalla chiave specificata nel registro LOCAL_MACHINE
+ </summary>
+	<param name="chiave">Chiave all'interno del registro LOCAL_MACHINE</param>
+	<param name="nome">Nome</param>
+	<param name="valoreDefault">Valore da restituire nel caso la lettura non abbia avuto successo</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:b2a.BlackBox.clsRegistro.scriviValore(System.String,System.String,System.String)">
+	<summary>
+ Scrive un valore nalla chiave specificata nel registro LOCAL_MACHINE
+ </summary>
+	<param name="chiave">Chiave all'interno del LOCAL_MACHINE </param>
+	<param name="nome">Nome</param>
+	<param name="valore">Valore</param>
+	<returns>True se la scrittura è andata a buon fine</returns>
+</member><member name="M:b2a.BlackBox.clsRegistro.scriviValore3264(System.String,System.String,System.String)">
+	<summary>
+ Scrive un valore nella chiave specificata nel registro LOCAL_MACHINE, in ENTRAMBI i registri 32 e 64 bit
+ </summary>
+	<param name="chiave">Chiave all'interno del LOCAL_MACHINE </param>
+	<param name="nome">Nome</param>
+	<param name="valore">Valore</param>
+	<returns>True se la scrittura è andata a buon fine</returns>
+</member><member name="T:b2a.BlackBox.clsRegistro">
+	<summary>
+ Classe per l'accesso in lettura/scrittura a valori all'interno del registro LOCAL_MACHINE
+ </summary>
+	<remarks></remarks>
+</member><member name="M:b2a.BlackBox.clsUtil.#ctor">
+	<summary>
+ Costruttore privato per classe di soli metodi statici
+ </summary>
+</member><member name="M:b2a.BlackBox.clsUtil.bytes2Stringa(System.Byte[],System.Int32)">
+	<summary>
+ Costruisce una stringa da un array di byte, utilizzando ripetutamente la funzione <seealso cref="M:Microsoft.VisualBasic.Strings.Chr(System.Int32)">Chr</seealso>
+	</summary>
+</member><member name="M:b2a.BlackBox.clsUtil.stringa2Byte(System.String)">
+	<summary>
+ Costruisce array di byte da una stringa, utilizzando ripetutamente la funzione <seealso cref="M:Microsoft.VisualBasic.Strings.Asc(System.Char)"></seealso>
+ L'array viene ad avere la stessa lunghezza della stringa originaria
+ </summary>
+</member><member name="M:b2a.BlackBox.clsUtil.calcolaCheckDigitEAN(System.String)">
+	<summary>
+ Restituisce il check digit dal codice passato come parametro
+ </summary>
+	<param name="codice">Codice a barre del quale si vuol calcolare il checkdigit</param>
+	<returns>Checkdigit</returns>
+	<remarks>
+ Il check digit viene calcolato nel modo seguente:
+ 1. si sommano le cifre di posto dispari moltiplicate per 3 e le cifre di posto pari moltiplicate per 1
+   (a partire dalla prima cifra a destra destra che è la prima dispari)
+ 2. si sottrae dalla decina superiore la somma ottenuta oppure si sottrae a 10 il resto della divisione per 10 della somma ottenuta
+ </remarks>
+</member><member name="M:b2a.BlackBox.clsUtil.split2(System.String,System.String)">
+	<summary>
+ Separa una stringa in sottostringhe in base al separatore. Estende il comando Split permettendo 
+ di usare stringhe separatrici invece che singoli caratteri. 
+ Nel caso in cui il separatore è composto da un unico carattere, esegue lo Split normale
+ </summary>
+	<param name="testo">Il testo da separare</param>
+	<param name="separatore">Stringa separatrice</param>
+	<returns></returns>
+</member><member name="M:b2a.BlackBox.clsUtil.ping(System.String,System.Int32,System.Int32)">
+	<summary>
+ Verifica la raggiungibilità di un dispositivo con il comando PING facendo più tentativi.
+ Appena una di esse ha esito positivo, il dispositivo viene indicato come raggiungibile. 
+ </summary>
+	<param name="ipAddress">Indirizzo dispositivo (IPv4)</param>
+	<param name="intervalloVerifica">[ms] Intervallo di verifica in cui vengono effettuati i tentativi (default 1 secondo)</param>
+	<param name="timeout">[ms] Timeout di verifica di ogni singolo tentativo (default=500)</param>
+	<returns>TRUE se il dispositivo risulta raggiungibile nell'intervallo di verifica, False in tutti gli altri casi (indirizzo non conforme, dispositivo spento..)</returns>
+	<remarks></remarks>
+</member><member name="M:b2a.BlackBox.clsUtil.recupera_primo_IP">
+	<summary>
+ Recupera il primo dei possibili indirizzi IP (e se possibile in versione IP4 e scartando indirizzi non significativi come APIPA o localhost)
+ </summary>
+</member><member name="M:b2a.BlackBox.clsUtil.testScritturaDirectory(System.String)">
+	<summary>
+ Verifica se una cartella è scrivibile
+ </summary>
+	<param name="path">Percorso completo della cartella</param>
+	<returns>True se la cartella è scrivibile, False se non esiste o non è scrivibile</returns>
+</member><member name="M:b2a.BlackBox.clsUtil.controllaTempoCreazioneFile(System.String,System.Int32)">
+	<summary>
+ Controlla se il file ha un'età superiore al numero di secondi passati come parametro
+ </summary>
+	<param name="nomeFile">Percorso completo del file</param>
+	<param name="secondi">[s] tempo trascorso dalla creazione del file</param>
+	<returns>TRUE se il file supera l'età specificata e anche se ci sono problemi</returns>
+</member><member name="M:b2a.BlackBox.clsUtil.BitArchitettura">
+	<summary>
+ Restituisce l'architettura con cui il progetto è compilato (32 o 64 bit)
+ </summary>
+</member><member name="T:b2a.BlackBox.clsUtil">
+	<summary>
+ Classe con funzioni varie di utilità generale
+ </summary>
+</member>
+</members>
+</doc>
