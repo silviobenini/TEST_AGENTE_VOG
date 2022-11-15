@@ -43,6 +43,11 @@ namespace Agente_VOG.SottoServizi
 
             // gira solo  alle 6.30 e alle 23:15
 
+
+
+
+
+
             switch (ora)
             {
                 case 6:
